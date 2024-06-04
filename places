@@ -1,0 +1,37 @@
+;;; -*- coding: utf-8; mode: lisp-data -*-
+(("/home/azmain/.emacs.d/.gitignore" . 22)
+ ("/mnt/docs/"
+  (dired-filename . "/mnt/docs/project"))
+ ("/mnt/docs/project/"
+  (dired-filename . "/mnt/docs/project/mcmc"))
+ ("/mnt/docs/project/mcmc/"
+  (dired-filename . "/mnt/docs/project/mcmc/final-silde"))
+ ("/mnt/docs/project/mcmc/final-silde/macro.tex" . 308)
+ ("/mnt/docs/project/mcmc/final-silde/"
+  (dired-filename . "/mnt/docs/project/mcmc/final-silde/mcmc.tex"))
+ ("/mnt/docs/project/mcmc/final-silde/mcmc.tex" . 1406)
+ ("/mnt/docs/project/mcmc/final-silde/section/MH-algo.tex" . 992)
+ ("/mnt/docs/code/c/program/musicvi/main.c" . 3335)
+ ("/usr/include/stdio.h" . 11371)
+ ("/home/azmain/.emacs.d/init.el" . 7719)
+ ("/mnt/docs/code/c/program/musicvi/"
+  (dired-filename . "/mnt/docs/code/c/program/musicvi/main.c"))
+ ("/usr/include/string.h" . 629)
+ ("/home/azmain/"
+  (dired-filename . "/home/azmain/.emacs.d"))
+ ("/usr/share/emacs/29.3/lisp/use-package/use-package-core.el.gz" . 1607)
+ ("/mnt/docs/$RECYCLE.BIN/"
+  (dired-filename . "/mnt/docs/$RECYCLE.BIN/.."))
+ ("/mnt/docs/book/"
+  (dired-filename . "/mnt/docs/book/.."))
+ ("/mnt/docs/code/"
+  (dired-filename . "/mnt/docs/code/c"))
+ ("/mnt/docs/code/c/"
+  (dired-filename . "/mnt/docs/code/c/program"))
+ ("/mnt/docs/code/c/program/"
+  (dired-filename . "/mnt/docs/code/c/program/donat"))
+ ("/mnt/docs/code/c/program/donat/"
+  (dired-filename . "/mnt/docs/code/c/program/donat/donat.c"))
+ ("/mnt/docs/code/c/program/donat/donat.c" . 658)
+ ("/home/azmain/.emacs.d/"
+  (dired-filename . "/home/azmain/.emacs.d/init.el")))

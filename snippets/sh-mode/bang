@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: she bang line for bash 
+# key: bang
+# --
+#!/usr/bin/env bash
+

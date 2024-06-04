@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: code
+# key: code
+# --
+\begin{lstlisting}[language=${1:python}, caption=${caption}]
+$0
+\end{lstlisting}
