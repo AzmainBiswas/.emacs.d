@@ -1,7 +1,39 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/home/azmain/.emacs.d/.gitignore" . 22)
+(("/home/azmain/.emacs.d/init.el" . 2399)
+ ("/home/azmain/.local/src/dwm/"
+  (dired-filename . "/home/azmain/.local/src/dwm/config.def.h"))
+ ("/home/azmain/.local/src/dwm/config.def.h" . 9260)
+ ("/home/azmain/.emacs.d/.gitignore" . 37)
+ ("/usr/share/emacs/29.3/lisp/loaddefs.el.gz" . 1424870)
+ ("/home/azmain/.dotfiles/setup/"
+  (dired-filename . "/home/azmain/.dotfiles/setup/debian.sh"))
+ ("/home/azmain/.dotfiles/setup/debian.sh" . 477)
+ ("/mnt/docs/code/c/program/game_of_life/src/main.c" . 33)
  ("/mnt/docs/"
-  (dired-filename . "/mnt/docs/project"))
+  (dired-filename . "/mnt/docs/code"))
+ ("/mnt/docs/code/"
+  (dired-filename . "/mnt/docs/code/c"))
+ ("/mnt/docs/code/c/"
+  (dired-filename . "/mnt/docs/code/c/program"))
+ ("/mnt/docs/code/c/program/"
+  (dired-filename . "/mnt/docs/code/c/program/game_of_life"))
+ ("/mnt/docs/code/c/program/game_of_life/"
+  (dired-filename . "/mnt/docs/code/c/program/game_of_life/src"))
+ ("/mnt/docs/code/c/program/game_of_life/src/"
+  (dired-filename . "/mnt/docs/code/c/program/game_of_life/src/main.c"))
+ ("/home/azmain/Documents/"
+  (dired-filename . "/home/azmain/Documents/text.c"))
+ ("/home/azmain/Documents/text.c" . 39)
+ ("/home/azmain/.config/alacritty/themes/"
+  (dired-filename . "/home/azmain/.config/alacritty/themes/DoomOne.toml"))
+ ("/home/azmain/.dotfiles/.config/alacritty/themes/DoomOne.toml" . 72)
+ ("/mnt/docs/sync2/Note/M.Sc Thesis/Conclusion.md" . 15)
+ ("/mnt/docs/sync2/"
+  (dired-filename . "/mnt/docs/sync2/Note"))
+ ("/mnt/docs/sync2/Note/"
+  (dired-filename . "/mnt/docs/sync2/Note/M.Sc Thesis"))
+ ("/mnt/docs/sync2/Note/M.Sc Thesis/"
+  (dired-filename . "/mnt/docs/sync2/Note/M.Sc Thesis/Conclusion.md"))
  ("/mnt/docs/project/"
   (dired-filename . "/mnt/docs/project/mcmc"))
  ("/mnt/docs/project/mcmc/"
@@ -13,7 +45,6 @@
  ("/mnt/docs/project/mcmc/final-silde/section/MH-algo.tex" . 992)
  ("/mnt/docs/code/c/program/musicvi/main.c" . 3335)
  ("/usr/include/stdio.h" . 11371)
- ("/home/azmain/.emacs.d/init.el" . 7719)
  ("/mnt/docs/code/c/program/musicvi/"
   (dired-filename . "/mnt/docs/code/c/program/musicvi/main.c"))
  ("/usr/include/string.h" . 629)
@@ -24,12 +55,6 @@
   (dired-filename . "/mnt/docs/$RECYCLE.BIN/.."))
  ("/mnt/docs/book/"
   (dired-filename . "/mnt/docs/book/.."))
- ("/mnt/docs/code/"
-  (dired-filename . "/mnt/docs/code/c"))
- ("/mnt/docs/code/c/"
-  (dired-filename . "/mnt/docs/code/c/program"))
- ("/mnt/docs/code/c/program/"
-  (dired-filename . "/mnt/docs/code/c/program/donat"))
  ("/mnt/docs/code/c/program/donat/"
   (dired-filename . "/mnt/docs/code/c/program/donat/donat.c"))
  ("/mnt/docs/code/c/program/donat/donat.c" . 658)

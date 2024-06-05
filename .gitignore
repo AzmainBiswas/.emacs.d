@@ -2,3 +2,4 @@ elpa/
 .cache/
 *~*
 *~
+.lsp-session-v1

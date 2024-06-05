@@ -19,7 +19,7 @@
 (tool-bar-mode 0)
 
 ;; set type of line numbering (global variable)
-(setq display-line-numbers-type 'relative) 
+(setq display-line-numbers-type 'relative)
 ;; activate line numbering in all buffers/modes
 (global-display-line-numbers-mode)
 
@@ -36,9 +36,6 @@
 ;; some more settings
 (setq ring-bell-function 'ignore)
 (setq use-dialog-box nil)
-(setq use-file-dialog nil)
-(setq make-backup-files nil)
-(setq auto-save-default nil)
 (setq tab-width 2) ; or any other preferred value
 (defvaralias 'c-basic-offset 'tab-width)
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -52,6 +49,26 @@
 (global-auto-revert-mode 1) ;; Revert buffers when the fill cnanged
 (setq global-auto-revert-non-file-buffers t)
 
+;; Put backup files neatly away
+(let ((backup-dir "~/tmp/emacs/backups")
+      (auto-saves-dir "~/tmp/emacs/auto-saves/"))
+  (dolist (dir (list backup-dir auto-saves-dir))
+    (when (not (file-directory-p dir))
+      (make-directory dir t)))
+  (setq backup-directory-alist `(("." . ,backup-dir))
+        auto-save-file-name-transforms `((".*" ,auto-saves-dir t))
+        auto-save-list-file-prefix (concat auto-saves-dir ".saves-")
+        tramp-backup-directory-alist `((".*" . ,backup-dir))
+        tramp-auto-save-directory auto-saves-dir))
+
+(setq backup-by-copying t    ; Don't delink hardlinks
+      delete-old-versions t  ; Clean up the backups
+      version-control t      ; Use version numbers on backups,
+      kept-new-versions 5    ; keep some new versions
+      kept-old-versions 2)   ; and some old ones, too
+
+;; emacs transparent 29 and above
+(add-to-list 'default-frame-alist '(alpha-background . 100))
 
 ;;
 ;; Packages
@@ -82,11 +99,12 @@
   :if window-system
   :ensure t
   :config
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+	doom-themes-enable-italic t) ; if nil, italics is universally disabled
   (doom-themes-org-config)
   (doom-themes-visual-bell-config))
 
-(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-      doom-themes-enable-italic t) ; if nil, italics is universally disabled
+
 (load-theme 'doom-one t)
 
 ;; icons
@@ -188,7 +206,7 @@
 	 ("M-y" . counsel-yank-pop)
 	 ("C-x b" . counsel-switch-buffer)
 	 ("C-c i m" . counsel-imenu)
-	 ("C-c s" . counsel-rg)
+	 ("C-c g" . counsel-rg)
 	 ("C-x C-f" . counsel-find-file)
 	 ("C-c C-r" . ivy-resume)
 	 :map ivy-minibuffer-map
@@ -212,6 +230,7 @@
   :config
   (ivy-mode 1))
 (setq ivy-initial-inputs-alist nil)
+(setq ivy-use-selectable-prompt t)
 
 (use-package all-the-icons-ivy-rich
   :ensure t
@@ -257,10 +276,15 @@
 ;; Snippets
 (use-package yasnippet
   :ensure t
+  :bind ("M-+" . yas-insert-snippet)
   :config
   (yas-global-mode 1))
 (setq yas-snippet-dirs
       '("~/.emacs.d/snippets")) ;; personal snippets add if u want
+
+;; yasnippet offician snippets
+(use-package yasnippet-snippets
+  :ensure t :after yasnippet)
        
 ;; projectile
 ;; Projectile is a project interaction library for Emacs.
@@ -275,10 +299,41 @@
 ;; Tree-sitter
 (use-package tree-sitter
   :ensure t)
+
 (use-package tree-sitter-langs
   :ensure t)
 (global-tree-sitter-mode)
 (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+
+;; vterm
+(use-package vterm
+  :ensure t
+  :bind
+  (:map global-map
+	  ("C-`" . vterm-toggle)) ;; I am guilty for this using Vs code bind.
+  :config
+  (setq shell-file-name "/bin/bash"
+	  vterm-max-scrollback 5000))
+
+(use-package vterm-toggle
+  :ensure t
+  :after vterm
+  :config
+  (setq vterm-toggle-fullscreen-p nil)
+  (setq vterm-toggle-scope 'project)
+  (add-to-list 'display-buffer-alist
+							 '((lambda (buffer-or-name _)
+									 (let ((buffer (get-buffer buffer-or-name)))
+										 (with-current-buffer buffer
+											 (or (equal major-mode 'vterm-mode)
+													 (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
+								 (display-buffer-reuse-window display-buffer-at-bottom)
+								 ;;(display-buffer-reuse-window display-buffer-in-direction)
+								 ;;display-buffer-in-direction/direction/dedicated is added in emacs27
+								 ;;(direction . bottom)
+								 ;;(dedicated . t) ;dedicated is supported in emacs27
+								 (reusable-frames . visible)
+								 (window-height . 0.3))))
 
 ;;
 ;; LSP
@@ -292,40 +347,61 @@
 	 (sh-mode . lsp)
 	 (c-mode . lsp)
 	 (TeX-mode  . lsp)
-	 (markdown-mode . lsp)
 	 (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
+(setq lsp-signature-auto-activate t)
+(setq lsp-signature-render-documentation t)
+(setq lsp-eldoc-enable-hover t)
 
 (use-package lsp-ui
   :ensure t
   :hook (lsp-mode . lsp-ui-mode))
+(setq lsp-headerline-breadcrumb-enable nil)
+(setq lsp-enable-symbol-highlighting t)
+(setq lsp-ui-sideline-enable t)
+(setq lsp-ui-doc-enable t)
+(setq lsp-ui-doc-position 'at-point)
+(setq lsp-ui-doc-show-with-cursor nil)
+(setq lsp-ui-doc-show-with-mouse t)
 
 
 (use-package lsp-ivy
   :ensure t
   :commands lsp-ivy-workspace-symbol)
 
-;; Auto complitions
+;; error checking
+(use-package flycheck
+  :ensure t
+  :hook (lsp-mode . flycheck-mode))
+
+;; Auto complitions company package
 (use-package company
   :ensure t
-  :after lsp-mode
-  :hook (lsp-mode . company-mode)
   :custom
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0))
-
-(use-package flycheck
-  :ensure t
-  :config
-  (add-hook 'after-init-hook #'global-flycheck-mode))
+(add-hook 'after-init-hook 'global-company-mode)
+;; (global-set-key (kbd "<tab>") #'company-indent-or-complete-common)
+(define-key global-map (kbd "C-.") 'company-files)
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "M-/") #'company-complete))
+(with-eval-after-load 'company
+  (define-key company-active-map
+              (kbd "TAB")
+              #'company-complete-common-or-cycle)
+  (define-key company-active-map
+              (kbd "<backtab>")
+              (lambda ()
+                (interactive)
+                (company-complete-common-or-cycle -1))))
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "M-.") #'company-show-location))
+(setq company-files-exclusions '(".git/" ".DS_Store"))
 
 (use-package company-box
   :ensure t
-  :hook (company-mode . company-box-mode)
-  :config
-  (setq company-box-frame-top-margin 20)
-  (setq company-box-frame-top-margin 75))
-  
+  :hook (company-mode . company-box-mode))
+
 
 
 ;;
@@ -342,14 +418,27 @@
 ;; Custome functions
 ;;
 
+(defun comment-line ()
+  "Comment or uncomment the whole line."
+  (interactive)
+  (save-excursion
+    (move-beginning-of-line nil)
+    (set-mark (point))
+    (move-end-of-line nil)
+    (comment-or-uncomment-region (region-beginning) (region-end))))
+(global-set-key (kbd "C-;") 'comment-line)
+(global-set-key (kbd "C-:") 'comment-or-uncomment-region)
+
 ;; open config file of emacs
 (defun open-config ()
+  "open emacs config file"
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 (global-set-key (kbd "C-c o") 'open-config)
 
 ;; Reload Config file of emacs
 (defun config-reload ()
+  "reload emacs config file"
   (interactive)
   (load-file "~/.emacs.d/init.el"))
 (global-set-key (kbd "C-c r") 'config-reload)
@@ -391,6 +480,7 @@
 ;; 
 ;; Custome file
 ;;
-
 (setq custom-file "~/.custom.el")
 
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
