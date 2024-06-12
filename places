@@ -1,16 +1,73 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/home/azmain/.emacs.d/init.el" . 2399)
+(("/mnt/docs/sync2/Note/M.Sc Thesis/slide.md" . 1075)
+ ("/mnt/docs/sync2/Note/"
+  (dired-filename . "/mnt/docs/sync2/Note/M.Sc Thesis"))
+ ("/mnt/docs/sync2/Note/M.Sc Thesis/"
+  (dired-filename . "/mnt/docs/sync2/Note/M.Sc Thesis/.Conclusion.md.~undo-tree~"))
+ ("/home/azmain/.dotfiles/.config/polybar/config" . 617)
+ ("/home/azmain/.dotfiles/.config/alacritty/alacritty.toml" . 202)
+ ("/home/azmain/.dotfiles/.config/alacritty/themes/DoomOne.toml" . 311)
+ ("/home/azmain/.dotfiles/.config/i3/config" . 17099)
+ ("/home/azmain/.dotfiles/.bashrc" . 6387)
+ ("/home/azmain/.dotfiles/.config/starship/"
+  (dired-filename . "/home/azmain/.dotfiles/.config/starship/starship.toml"))
+ ("/home/azmain/.dotfiles/.config/starship/starship.toml" . 429)
+ ("/home/azmain/.emacs.d/init.el" . 5640)
+ ("/usr/share/emacs/29.3/lisp/loaddefs.el.gz" . 42472)
+ ("/home/azmain/.dotfiles/"
+  (dired-filename . "/home/azmain/.dotfiles/setup"))
+ ("/home/azmain/.dotfiles/setup/"
+  (dired-filename . "/home/azmain/.dotfiles/setup/install-font.sh"))
+ ("/home/azmain/.dotfiles/setup/install-font.sh" . 1780)
+ ("/home/azmain/.dotfiles/bin/audio-song" . 1655)
+ ("/home/azmain/.dotfiles/.config/i3/"
+  (dired-filename . "/home/azmain/.dotfiles/.config/i3/.."))
+ ("/home/azmain/.dotfiles/.config/"
+  (dired-filename . "/home/azmain/.dotfiles/.config/.."))
+ ("/home/azmain/"
+  (dired-filename . "/home/azmain/Documents"))
+ ("/home/azmain/Documents/"
+  (dired-filename . "/home/azmain/Documents/fstab.toadd"))
+ ("/home/azmain/.emacs.d/"
+  (dired-filename . "/home/azmain/.emacs.d/.git"))
+ ("/mnt/docs/code/c/learning/ml/single_neuron.c" . 1367)
+ ("/home/azmain/.dotfiles/.bash_profile" . 148)
+ ("/home/azmain/.dotfiles/bin/dmenu_google.sh" . 90)
+ ("/mnt/docs/sync2/Note/M.Sc Thesis/Conclusion.md" . 1612)
+ ("/usr/share/emacs/29.3/etc/HELLO" . 58)
+ ("/mnt/docs/code/c/learning/ml/"
+  (dired-filename . "/mnt/docs/code/c/learning/ml/single_neuron.c"))
+ ("/mnt/docs/code/c/program/musicvi/"
+  (dired-filename . "/mnt/docs/code/c/program/musicvi/main.c"))
+ ("/mnt/docs/code/c/program/musicvi/main.c" . 7)
+ ("/home/"
+  (dired-filename . "/home/.."))
+ ("/"
+  (dired-filename . "/mnt"))
+ ("/mnt/"
+  (dired-filename . "/mnt/docs"))
+ ("/mnt/docs/"
+  (dired-filename . "/mnt/docs/project"))
+ ("/mnt/docs/project/"
+  (dired-filename . "/mnt/docs/project/mcmc"))
+ ("/mnt/docs/project/mcmc/"
+  (dired-filename . "/mnt/docs/project/mcmc/final-silde"))
+ ("/mnt/docs/project/mcmc/final-silde/"
+  (dired-filename . "/mnt/docs/project/mcmc/final-silde/section"))
+ ("/mnt/docs/project/mcmc/final-silde/section/"
+  (dired-filename . "/mnt/docs/project/mcmc/final-silde/section/MH-algo.tex"))
+ ("/mnt/docs/project/mcmc/final-silde/section/MH-algo.tex" . 7306)
+ ("/../"
+  (dired-filename . "/../mnt"))
+ ("/../mnt/"
+  (dired-filename . "/../mnt/docs"))
+ ("/../mnt/docs/"
+  (dired-filename . "/../mnt/docs/.."))
  ("/home/azmain/.local/src/dwm/"
   (dired-filename . "/home/azmain/.local/src/dwm/config.def.h"))
- ("/home/azmain/.local/src/dwm/config.def.h" . 9260)
  ("/home/azmain/.emacs.d/.gitignore" . 37)
- ("/usr/share/emacs/29.3/lisp/loaddefs.el.gz" . 1424870)
- ("/home/azmain/.dotfiles/setup/"
-  (dired-filename . "/home/azmain/.dotfiles/setup/debian.sh"))
  ("/home/azmain/.dotfiles/setup/debian.sh" . 477)
  ("/mnt/docs/code/c/program/game_of_life/src/main.c" . 33)
- ("/mnt/docs/"
-  (dired-filename . "/mnt/docs/code"))
  ("/mnt/docs/code/"
   (dired-filename . "/mnt/docs/code/c"))
  ("/mnt/docs/code/c/"
@@ -21,35 +78,14 @@
   (dired-filename . "/mnt/docs/code/c/program/game_of_life/src"))
  ("/mnt/docs/code/c/program/game_of_life/src/"
   (dired-filename . "/mnt/docs/code/c/program/game_of_life/src/main.c"))
- ("/home/azmain/Documents/"
-  (dired-filename . "/home/azmain/Documents/text.c"))
- ("/home/azmain/Documents/text.c" . 39)
  ("/home/azmain/.config/alacritty/themes/"
   (dired-filename . "/home/azmain/.config/alacritty/themes/DoomOne.toml"))
- ("/home/azmain/.dotfiles/.config/alacritty/themes/DoomOne.toml" . 72)
- ("/mnt/docs/sync2/Note/M.Sc Thesis/Conclusion.md" . 15)
  ("/mnt/docs/sync2/"
   (dired-filename . "/mnt/docs/sync2/Note"))
- ("/mnt/docs/sync2/Note/"
-  (dired-filename . "/mnt/docs/sync2/Note/M.Sc Thesis"))
- ("/mnt/docs/sync2/Note/M.Sc Thesis/"
-  (dired-filename . "/mnt/docs/sync2/Note/M.Sc Thesis/Conclusion.md"))
- ("/mnt/docs/project/"
-  (dired-filename . "/mnt/docs/project/mcmc"))
- ("/mnt/docs/project/mcmc/"
-  (dired-filename . "/mnt/docs/project/mcmc/final-silde"))
  ("/mnt/docs/project/mcmc/final-silde/macro.tex" . 308)
- ("/mnt/docs/project/mcmc/final-silde/"
-  (dired-filename . "/mnt/docs/project/mcmc/final-silde/mcmc.tex"))
  ("/mnt/docs/project/mcmc/final-silde/mcmc.tex" . 1406)
- ("/mnt/docs/project/mcmc/final-silde/section/MH-algo.tex" . 992)
- ("/mnt/docs/code/c/program/musicvi/main.c" . 3335)
  ("/usr/include/stdio.h" . 11371)
- ("/mnt/docs/code/c/program/musicvi/"
-  (dired-filename . "/mnt/docs/code/c/program/musicvi/main.c"))
  ("/usr/include/string.h" . 629)
- ("/home/azmain/"
-  (dired-filename . "/home/azmain/.emacs.d"))
  ("/usr/share/emacs/29.3/lisp/use-package/use-package-core.el.gz" . 1607)
  ("/mnt/docs/$RECYCLE.BIN/"
   (dired-filename . "/mnt/docs/$RECYCLE.BIN/.."))
@@ -57,6 +93,4 @@
   (dired-filename . "/mnt/docs/book/.."))
  ("/mnt/docs/code/c/program/donat/"
   (dired-filename . "/mnt/docs/code/c/program/donat/donat.c"))
- ("/mnt/docs/code/c/program/donat/donat.c" . 658)
- ("/home/azmain/.emacs.d/"
-  (dired-filename . "/home/azmain/.emacs.d/init.el")))
+ ("/mnt/docs/code/c/program/donat/donat.c" . 658))

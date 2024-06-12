@@ -1,1 +1,1 @@
-("~/.emacs.d/" "~/.dotfiles/")
+("/mnt/docs/project/mcmc/final-silde/" "~/.emacs.d/" "~/.dotfiles/")

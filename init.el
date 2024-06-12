@@ -36,8 +36,7 @@
 ;; some more settings
 (setq ring-bell-function 'ignore)
 (setq use-dialog-box nil)
-(setq tab-width 2) ; or any other preferred value
-(defvaralias 'c-basic-offset 'tab-width)
+(setq-default tab-width 4)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (global-subword-mode 1)
 (fringe-mode -1)
@@ -46,26 +45,29 @@
 (savehist-mode 1) ;; saving history.
 (save-place-mode 1) ;; for remenbarring location in the file 
 (setq use-dialog-box nil) ;; stoping Graphical UI
-(global-auto-revert-mode 1) ;; Revert buffers when the fill cnanged
+(global-auto-revert-mode 1)  ;;Revert buffers when the fill cnanged
 (setq global-auto-revert-non-file-buffers t)
 
+(add-hook 'window-setup-hook 'toggle-frame-maximized t)
+
+(electric-pair-mode 1) ;; turn on electric pair mode
+;; set "gnu" style indent for c
+(setq c-default-style "linux"
+	  c-basic-offset 2)
+
 ;; Put backup files neatly away
-(let ((backup-dir "~/tmp/emacs/backups")
-      (auto-saves-dir "~/tmp/emacs/auto-saves/"))
-  (dolist (dir (list backup-dir auto-saves-dir))
-    (when (not (file-directory-p dir))
-      (make-directory dir t)))
-  (setq backup-directory-alist `(("." . ,backup-dir))
-        auto-save-file-name-transforms `((".*" ,auto-saves-dir t))
-        auto-save-list-file-prefix (concat auto-saves-dir ".saves-")
-        tramp-backup-directory-alist `((".*" . ,backup-dir))
-        tramp-auto-save-directory auto-saves-dir))
+(setq backup-directory-alist '(("." . "/tmp/")))
+;; (setq undo-tree-history-directory-alist '(("." . "/tmp/")))
+(setq tramp-backup-directory-alist '((".*" . "/tmp/")))
+(setq auto-save-file-name-transforms `((".*" "/tmp/" t)))
+(setq tramp-auto-save-directory "/tmp/")
 
 (setq backup-by-copying t    ; Don't delink hardlinks
       delete-old-versions t  ; Clean up the backups
       version-control t      ; Use version numbers on backups,
       kept-new-versions 5    ; keep some new versions
       kept-old-versions 2)   ; and some old ones, too
+
 
 ;; emacs transparent 29 and above
 (add-to-list 'default-frame-alist '(alpha-background . 100))
@@ -88,10 +90,100 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+;; ;;
+;; ;; Evil mode
+;; ;;
+;; (use-package evil
+;;   :ensure t
+;;   :init
+;;   (setq evil-want-integration t)
+;;   (setq evil-want-keybinding nil)
+;;   (setq evil-want-C-u-scroll t)
+;;   (setq evil-want-C-i-jump nil)
+;;   :config
+;;   (evil-mode 1)
+;;   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+;;   (define-key evil-insert-state-map (kbd "C-d") 'evil-delete-backward-char-and-join)
+;;   (define-key evil-insert-state-map (kbd "C-y") 'evil-paste-after)
+;;   (define-key evil-normal-state-map (kbd "C-y") 'evil-paste-before)
+
+;;   ;; Use visual line motions even outside of visual-line-mode buffers
+;;   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+;;   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+;;   (evil-set-initial-state 'messages-buffer-mode 'normal)
+;;   (evil-set-initial-state 'dashboard-mode 'normal))
+
+;; (use-package evil-collection
+;;   :ensure t
+;;   :after evil
+;;   :config
+;;   (evil-collection-init))
+
+;; ;; general
+;; ;; Make ESC quit prompts
+;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+;; (use-package general
+;;   :ensure t
+;;   :after evil
+;;   :config
+;;   (general-evil-setup)
+;;   (general-auto-unbind-keys t)
+;;   (general-create-definer my-leader-keys
+;; 						  :keymaps '(normal insert visual emacs)
+;; 						  :prefix "SPC"
+;; 						  :global-prefix "M-SPC")
+
+;;   (my-leader-keys
+;;    "t"  '(:ignore t :which-key "toggles")
+;;    "tt" '(counsel-load-theme :which-key "choose theme")
+;;    "tl" '(display-line-numbers-mode :wk "Toggle line numbers")
+;;    ;; "tv" '(vterm-toggle :wk "Toggle vterm")
+;;    "cr" '(lambda () (interactive) (load-file (expand-file-name "~/.emacs.d/init.el")) :wk "reload config")
+;;    "co" '(lambda () (interactive) (find-file (expand-file-name "~/.emacs.d/init.el")) :which-key "open inti.el"))
+
+;;   (my-leader-keys
+;;    "e" '(:ignore t :wk "Eshell/Evaluate")    
+;;    "eb" '(eval-buffer :wk "Evaluate elisp in buffer")
+;;    "eh" '(counsel-esh-history :which-key "Eshell history")
+;;    "er" '(eval-region :wk "Evaluate elisp in region")
+;;    "es" '(eshell :which-key "Eshell"))
+
+;;   (my-leader-keys
+;;    "h" '(:ignore t :wk "Help")
+;;    "hf" '(describe-function :wk "Describe function")
+;;    "hv" '(describe-variable :wk "Describe variable")
+;;    "hr" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :wk "Reload emacs config"))
+
+;;   (my-leader-keys
+;;    "b" '(:ignore t :wk "Buffer Options")
+;;    "bj" '(ibuffer-jump :wk "Buffer Jump")
+;;    "bn" '(next-buffer :wk "Next Buffer")
+;;    "bp" '(previous buffer :wk "Previous Buffer"))
+
+;;   (my-leader-keys
+;;    "f" '(:ignor t :wk "File")
+;;    "ff" '(counsel-find-file :wk "Find file")
+;;    "fr" '(counsel-recentf :wk "Open recent file")
+;;    "fd" '(counsel-dired :wk "Open dired")
+;;    "fg" '(counsel-rg :wk "Grep(rg) command"))
+;;   (my-leader-keys
+;;    "i" '(:ignore t :wk "imenu")
+;;    "id" '(imenu-list-display-entry :ek "Display entry")
+;;    "it" '(imenu-list-smart-toggle :wk "Imenu toggle"))
+;;   )
 
 ;;
 ;; Some Ui plugins
 ;; 
+
+;; dired
+(require 'dired-x)
+(setq dired-omit-files
+      (concat dired-omit-files "\\|^\\..+$"))
+(setq-default dired-dwim-target t)
+(setq dired-listing-switches "-alh")
 
 ;; Doom themes
 (use-package doom-themes
@@ -99,12 +191,11 @@
   :if window-system
   :ensure t
   :config
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-	doom-themes-enable-italic t) ; if nil, italics is universally disabled
   (doom-themes-org-config)
   (doom-themes-visual-bell-config))
 
-
+(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+      doom-themes-enable-italic t) ; if nil, italics is universally disabled
 (load-theme 'doom-one t)
 
 ;; icons
@@ -192,6 +283,7 @@
 (use-package undo-tree
   :ensure t)
 (undo-tree-mode t)
+(setq undo-tree-auto-save-history nil)
 (global-undo-tree-mode)
 
 ;; Ivy
@@ -201,7 +293,7 @@
   :bind (
 	 :map global-map
 	 ("C-s" . counsel-grep-or-swiper)
-	 ("C-r" . counsel-grep-or-swiper-backward)
+	 ("C-r" . counsel-recentf)
 	 ("M-x" . counsel-M-x)
 	 ("M-y" . counsel-yank-pop)
 	 ("C-x b" . counsel-switch-buffer)
@@ -252,6 +344,7 @@
   (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
   :config
   (counsel-mode 1))
+(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
 ;; Move test
 (use-package move-text
@@ -305,35 +398,18 @@
 (global-tree-sitter-mode)
 (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
-;; vterm
-(use-package vterm
-  :ensure t
-  :bind
-  (:map global-map
-	  ("C-`" . vterm-toggle)) ;; I am guilty for this using Vs code bind.
-  :config
-  (setq shell-file-name "/bin/bash"
-	  vterm-max-scrollback 5000))
 
-(use-package vterm-toggle
-  :ensure t
-  :after vterm
-  :config
-  (setq vterm-toggle-fullscreen-p nil)
-  (setq vterm-toggle-scope 'project)
-  (add-to-list 'display-buffer-alist
-							 '((lambda (buffer-or-name _)
-									 (let ((buffer (get-buffer buffer-or-name)))
-										 (with-current-buffer buffer
-											 (or (equal major-mode 'vterm-mode)
-													 (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
-								 (display-buffer-reuse-window display-buffer-at-bottom)
-								 ;;(display-buffer-reuse-window display-buffer-in-direction)
-								 ;;display-buffer-in-direction/direction/dedicated is added in emacs27
-								 ;;(direction . bottom)
-								 ;;(dedicated . t) ;dedicated is supported in emacs27
-								 (reusable-frames . visible)
-								 (window-height . 0.3))))
+;;
+;; Multiple curser
+(use-package multiple-cursors
+  :ensure t)
+; bindings
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->")         'mc/mark-next-like-this)
+(global-set-key (kbd "C-<")         'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<")     'mc/mark-all-like-this)
+(global-set-key (kbd "C-\"")        'mc/skip-to-next-like-this)
+(global-set-key (kbd "C-|")         'mc/skip-to-previous-like-this)
 
 ;;
 ;; LSP
@@ -346,7 +422,7 @@
 	 (lua-mode . lsp)
 	 (sh-mode . lsp)
 	 (c-mode . lsp)
-	 (TeX-mode  . lsp)
+	 (latex-mode  . lsp)
 	 (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
 (setq lsp-signature-auto-activate t)
@@ -402,12 +478,18 @@
   :ensure t
   :hook (company-mode . company-box-mode))
 
-
+;;
+;; Markdown
+;;
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)))
 
 ;;
 ;; Org mode
 ;;
-;; org-bullets
+; org-bullets
 (use-package org-bullets
   :ensure t
   :config
@@ -415,19 +497,30 @@
 (require 'org-tempo)
 
 ;;
-;; Custome functions
+;; Custom functions
 ;;
-
-(defun comment-line ()
-  "Comment or uncomment the whole line."
-  (interactive)
-  (save-excursion
-    (move-beginning-of-line nil)
-    (set-mark (point))
-    (move-end-of-line nil)
-    (comment-or-uncomment-region (region-beginning) (region-end))))
-(global-set-key (kbd "C-;") 'comment-line)
+(global-set-key (kbd "C-;")
+				(lambda ()
+				  "commenting and uncommenting a line"
+				  (interactive)
+				  (beginning-of-line)
+				  (set-mark-command nil)
+				  (end-of-line)
+				  (comment-or-uncomment-region (mark) (point))))
+;; commenting a region
 (global-set-key (kbd "C-:") 'comment-or-uncomment-region)
+
+;; dublicate a line in emacs
+(global-set-key (kbd "C-,")
+				(lambda ()
+				  (interactive)
+				  (beginning-of-line)
+				  (set-mark-command nil)
+				  (end-of-line)
+				  (kill-ring-save (mark) (point))
+				  (newline)
+				  (yank)
+				  (end-of-line)))
 
 ;; open config file of emacs
 (defun open-config ()
@@ -442,6 +535,48 @@
   (interactive)
   (load-file "~/.emacs.d/init.el"))
 (global-set-key (kbd "C-c r") 'config-reload)
+
+;; ;; Whitespace mode
+;; (defun rc/set-up-whitespace-handling ()
+;;   (interactive)
+;;   (whitespace-mode 1)
+;;   (add-to-list 'write-file-functions 'delete-trailing-whitespace))
+
+;; (add-hook 'tuareg-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'c++-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'c-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'simpc-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'emacs-lisp-mode 'rc/set-up-whitespace-handling)
+;; (add-hook 'java-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'lua-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'rust-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'scala-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'latex-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'markdown-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'haskell-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'python-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'erlang-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'asm-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'fasm-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'go-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'nim-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'yaml-mode-hook 'rc/set-up-whitespace-handling)
+;; (add-hook 'porth-mode-hook 'rc/set-up-whitespace-handling)
+
+;; flyspell mode
+(defun ab/flyspell-mode()
+  (interactive)
+  (flyspell-mode))
+(add-hook 'markdown-mode-hook 'ab/flyspell-mode)
+(add-hook 'gfm-mode-hook 'ab/flyspell-mode)
+
+;; word-wrap
+(defun rc/enable-word-wrap ()
+  (interactive)
+  (toggle-word-wrap 1))
+
+(add-hook 'markdown-mode-hook 'rc/enable-word-wrap)
+(add-hook 'latex-mode-hook 'rc/enable-word-wrap)
 
 
 ;;

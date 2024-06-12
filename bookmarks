@@ -1,0 +1,11 @@
+;;;; Emacs Bookmark Format Version 1;;;; -*- coding: utf-8-emacs; mode: lisp-data -*-
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("Notes"
+ (filename . "/mnt/docs/sync2/Note/")
+ (front-context-string . "M.Sc Thesis\n  dr")
+ (rear-context-string . "0K Jun  7 00:56 ")
+ (position . 423)
+ (last-modified 26214 53860 943322 81000))
+)
