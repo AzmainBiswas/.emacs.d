@@ -1,0 +1,20 @@
+# Emacs temporary and backup files
+*~
+\#*\#
+.\#*
+
+/auto-save-list/
+/server/
+/transient/
+/tree-sitter/
+/tutorial/
+/elpa/
+*elc
+.projectile
+.lsp-session*
+bookmarks.eld
+history
+ido.last
+places
+projects
+recentf
