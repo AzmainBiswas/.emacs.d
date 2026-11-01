@@ -1,0 +1,2 @@
+# Emacs Config
+tring emacs
