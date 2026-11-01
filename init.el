@@ -155,6 +155,15 @@
   :ensure t
   :hook (company-mode . company-box-mode))
 
+;; multi curser
+(use-package multiple-cursors
+  :ensure t
+  :config
+  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
+
 ;;
 ;; Markdown
 ;;
@@ -226,6 +235,31 @@
               (or (copy-sequence buffer-display-table)
                   (make-display-table)))
   (aset buffer-display-table ?\r []))
+
+(defun move-line-up ()
+  "Move the current line up by one line, preserving column position."
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (forward-line 0)
+      (transpose-lines 1)
+      (forward-line -2))
+    (forward-line -1)
+    (move-to-column col)))
+
+(defun move-line-down ()
+  "Move the current line down by one line, preserving column position."
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (forward-line 1)
+      (transpose-lines 1))
+    (forward-line 1)
+    (move-to-column col)))
+
+;; Keybindings: Meta + Shift + Up/Down
+(global-set-key (kbd "M-S-<down>") #'move-line-down)
+(global-set-key (kbd "M-S-<up>")   #'move-line-up)
 
 ;; add configs folder to the path 
 (add-to-list 'load-path (expand-file-name "configs" user-emacs-directory))
