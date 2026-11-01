@@ -1,2 +1,2 @@
 # Emacs Config
-tring emacs
+trying emacs

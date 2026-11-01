@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t; -*-
+;; init.el -- Main Entry Point -*- lexical-binding: t; -*-
 
 ;;
 ;; Emacs Settings
@@ -13,19 +13,11 @@
 ;; (setq display-line-numbers-type 'relative) ; set type of line numbering (global variable)
 (global-display-line-numbers-mode) ; activate line numbering in all buffers/modes
 
-
 ;; Font
 (set-face-attribute 'default nil
                     :family "FiraCode Nerd Font"
 					:weight 'regular
                     :height 140)
-
-;; (load-theme 'solarized-dark t)
-
-;; custome function for getting current font name in buffer
-(defun ab/get-font-name()
-  (interactive)
-  (insert (face-attribute 'default :family)))
 
 ;; Zoom with mouse
 (global-set-key (kbd "C-=") 'text-scale-increase)
@@ -59,7 +51,8 @@
   (savehist-mode 1))					;save the history
 
 (delete-selection-mode 1) 				;Typing or pasting text over a selection instantly replaces it
-(add-hook 'window-setup-hook 'toggle-frame-maximized t)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; (add-hook 'window-setup-hook 'toggle-frame-maximized t)
 
 ;;(desktop-save-mode 1)				   ; save session
 (electric-pair-mode 1)				   ; turn on electric pair mode
@@ -95,15 +88,18 @@
 ;; Custome file
 (setq custom-file "~/.custom.el")		; for throughing errors in different file
 
+;; Mode line
+(display-battery-mode 1)
+(display-time-mode 1)
+(format-time-string "%I:%M %P")
+
 ;; Melpa setup
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
-
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/"))
-
 (package-initialize)
 
 (use-package vertico
@@ -134,17 +130,38 @@
 	which-key-separator " → " ))
 (which-key-mode 1)
 
-(use-package doom-themes
+;; one dark theme
+(use-package atom-one-dark-theme
   :ensure t
-  :custom
-  ;; global settings
-  (doom-themes-enable-bold t)
-  (doom-themes-enable-italic))
-(load-theme 'doom-one t)
+  :config
+  (load-theme 'atom-one-dark t))
 
 ;; magit
 (use-package magit
-  :ensure t)
+  :ensure t
+  :bind
+  ("M-g" . magit-status))
+
+;; auto complete
+(use-package company
+  :ensure t
+  :hook (after-init-hook . global-company-mode)
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+(setq company-files-exclusions '(".git/" ".DS_Store"))
+
+(use-package company-box
+  :ensure t
+  :hook (company-mode . company-box-mode))
+
+;;
+;; Markdown
+;;
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)))
 
 ;;
 ;; org mode
@@ -197,10 +214,18 @@
 (add-hook 'org-mode-hook #'org-indent-mode)
 
 ;; custome function
+(defun ab/get-font-name()
+  (interactive)
+  "get the font famil"
+  (insert (face-attribute 'default :family)))
+
 (defun ab/hide-trailing-carriage-returns ()
-   (interactive)
+  (interactive)
   "Hide trailing carriage returns in the current buffer."
   (setq-local buffer-display-table
               (or (copy-sequence buffer-display-table)
                   (make-display-table)))
   (aset buffer-display-table ?\r []))
+
+;; add configs folder to the path 
+(add-to-list 'load-path (expand-file-name "configs" user-emacs-directory))

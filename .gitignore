@@ -3,12 +3,13 @@
 \#*\#
 .\#*
 
-/auto-save-list/
-/server/
-/transient/
-/tree-sitter/
-/tutorial/
-/elpa/
+auto-save-list/
+server/
+transient/
+tree-sitter/
+tutorial/
+elpa/
+eln-cache/
 *elc
 .projectile
 .lsp-session*
